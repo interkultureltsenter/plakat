@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interkulturelt Senter Sogndal</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Georgia', serif;
+    background: #f5f3ef;
+    color: #1a2744;
+    min-height: 100vh;
+  }
+
+  .header {
+    background: #1a2744;
+    color: white;
+    text-align: center;
+    padding: 24px 16px 16px;
+  }
+
+  .header .motto {
+    font-style: italic;
+    font-size: 13px;
+    color: #aab4cc;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: white;
+  }
+
+  .header h1 span {
+    color: #C0392B;
+  }
+
+  .lang-section {
+    padding: 20px 16px 8px;
+    text-align: center;
+  }
+
+  .lang-section p {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  .flags-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .flag-btn {
+    background: white;
+    border: 2px solid #e0ddd8;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .flag-btn:hover, .flag-btn.active {
+    border-color: #C0392B;
+    background: #fff5f5;
+  }
+
+  .flag-btn .lang-name {
+    font-size: 10px;
+    color: #666;
+    font-family: sans-serif;
+  }
+
+  .content-card {
+    background: white;
+    margin: 16px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  .poster-img {
+    width: 100%;
+    display: block;
+  }
+
+  .content-body {
+    padding: 24px 20px;
+  }
+
+  .content-motto {
+    font-style: italic;
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .bli-med {
+    font-size: 32px;
+    font-weight: 900;
+    color: #C0392B;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .join-line {
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .felles {
+    font-size: 16px;
+    font-weight: 700;
+    color: #C0392B;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .main-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #1a2744;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .contact-section {
+    border-top: 2px solid #f0ede8;
+    padding-top: 20px;
+  }
+
+  .contact-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #888;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    font-family: sans-serif;
+  }
+
+  .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: sans-serif;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .contact-btn.facebook {
+    background: #1877F2;
+    color: white;
+  }
+
+  .contact-btn.messenger {
+    background: linear-gradient(135deg, #0099FF, #A033FF);
+    color: white;
+  }
+
+  .contact-btn.email {
+    background: #C0392B;
+    color: white;
+  }
+
+  .contact-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .contact-btn .icon {
+    font-size: 20px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px 16px;
+    font-size: 11px;
+    color: #aaa;
+    font-family: sans-serif;
+  }
+
+  #lang-display { display: none; }
+  #lang-display.visible { display: block; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="motto" id="header-motto">verdens vidde under den norske himmelen</div>
+  <h1>INTERKULTURELT <span>Senter</span></h1>
+</div>
+
+<div class="lang-section">
+  <p id="choose-text">Vel språk / Choose your language / اختر لغتك</p>
+  <div class="flags-grid">
+    <button class="flag-btn" onclick="showLang('no')">🇳🇴 <span class="lang-name">Nynorsk</span></button>
+    <button class="flag-btn" onclick="showLang('nb')">🇳🇴 <span class="lang-name">Bokmål</span></button>
+    <button class="flag-btn" onclick="showLang('pl')">🇵🇱 <span class="lang-name">Polski</span></button>
+    <button class="flag-btn" onclick="showLang('uk')">🇺🇦 <span class="lang-name">Українська</span></button>
+    <button class="flag-btn" onclick="showLang('en')">🇬🇧 <span class="lang-name">English</span></button>
+    <button class="flag-btn" onclick="showLang('ar')">🇸🇦 <span class="lang-name">العربية</span></button>
+    <button class="flag-btn" onclick="showLang('so')">🇸🇴 <span class="lang-name">Soomaali</span></button>
+    <button class="flag-btn" onclick="showLang('ti')">🇪🇷 <span class="lang-name">ትግርኛ</span></button>
+    <button class="flag-btn" onclick="showLang('am')">🇪🇹 <span class="lang-name">አማርኛ</span></button>
+    <button class="flag-btn" onclick="showLang('fa')">🇮🇷 <span class="lang-name">فارسی</span></button>
+    <button class="flag-btn" onclick="showLang('da')">🇦🇫 <span class="lang-name">Dari</span></button>
+    <button class="flag-btn" onclick="showLang('ps')">🇦🇫 <span class="lang-name">پښتو</span></button>
+    <button class="flag-btn" onclick="showLang('de')">🇩🇪 <span class="lang-name">Deutsch</span></button>
+    <button class="flag-btn" onclick="showLang('fr')">🇫🇷 <span class="lang-name">Français</span></button>
+    <button class="flag-btn" onclick="showLang('es')">🇪🇸 <span class="lang-name">Español</span></button>
+    <button class="flag-btn" onclick="showLang('pt')">🇧🇷 <span class="lang-name">Português</span></button>
+    <button class="flag-btn" onclick="showLang('ro')">🇷🇴 <span class="lang-name">Română</span></button>
+    <button class="flag-btn" onclick="showLang('sr')">🇷🇸 <span class="lang-name">Српски</span></button>
+    <button class="flag-btn" onclick="showLang('hr')">🇭🇷 <span class="lang-name">Hrvatski</span></button>
+    <button class="flag-btn" onclick="showLang('sk')">🇸🇰 <span class="lang-name">Slovenčina</span></button>
+    <button class="flag-btn" onclick="showLang('hu')">🇭🇺 <span class="lang-name">Magyar</span></button>
+    <button class="flag-btn" onclick="showLang('tr')">🇹🇷 <span class="lang-name">Türkçe</span></button>
+    <button class="flag-btn" onclick="showLang('lt')">🇱🇹 <span class="lang-name">Lietuvių</span></button>
+    <button class="flag-btn" onclick="showLang('lv')">🇱🇻 <span class="lang-name">Latviešu</span></button>
+    <button class="flag-btn" onclick="showLang('fil')">🇵🇭 <span class="lang-name">Filipino</span></button>
+    <button class="flag-btn" onclick="showLang('th')">🇹🇭 <span class="lang-name">ภาษาไทย</span></button>
+    <button class="flag-btn" onclick="showLang('zh')">🇨🇳 <span class="lang-name">中文</span></button>
+    <button class="flag-btn" onclick="showLang('ja')">🇯🇵 <span class="lang-name">日本語</span></button>
+    <button class="flag-btn" onclick="showLang('bn')">🇧🇩 <span class="lang-name">বাংলা</span></button>
+    <button class="flag-btn" onclick="showLang('rn')">🇧🇮 <span class="lang-name">Ikirundi</span></button>
+    <button class="flag-btn" onclick="showLang('ln')">🇨🇩 <span class="lang-name">Lingala</span></button>
+    <button class="flag-btn" onclick="showLang('ce')">🏔️ <span class="lang-name">Нохчийн</span></button>
+    <button class="flag-btn" onclick="showLang('cs')">🇨🇿 <span class="lang-name">Čeština</span></button>
+  </div>
+</div>
+
+<div class="content-card" id="lang-display">
+  <img src="Interkulturelt%203.png" alt="Interkulturelt Senter" class="poster-img" id="poster-image" onerror="this.style.display='none'">
+  <div class="content-body">
+    <div class="content-motto" id="content-motto"></div>
+    <div class="bli-med" id="bli-med"></div>
+    <div class="join-line" id="join-line"></div>
+    <div class="felles" id="felles"></div>
+    <div class="main-text" id="main-text"></div>
+    <div class="contact-section">
+      <div class="contact-title" id="contact-title">Kontakt</div>
+      <div class="contact-buttons">
+        <a href="https://www.facebook.com/InterkultureltSenter" class="contact-btn facebook" target="_blank">
+          <span class="icon">📘</span> facebook.com/InterkultureltSenter
+        </a>
+        <a href="https://m.me/InterkultureltSenter" class="contact-btn messenger" target="_blank">
+          <span class="icon">💬</span> Messenger: Interkulturelt Senter
+        </a>
+        <a href="mailto:interkultureltsenter@gmail.com" class="contact-btn email">
+          <span class="icon">✉️</span> interkultureltsenter@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Interkulturelt Senter Sogndal © 2025</div>
+
+<script>
+const langs = {
+  no: {
+    motto: "verdens vidde under den norske himmelen",
+    bli: "Bli med oss 🌈",
+    join: "Ямсавен з нами • Будь з нами • Bądź z nami",
+    felles: "Felles møte * Felles idear * Felles bord",
+    text: "Vi er ein nyoppretta organisasjon og håpar på mange nye medlemer!\nHjelp oss å skapa ein stad open for alle!",
+    contact: "Kontakt oss"
+  },
+  nb: {
+    motto: "verdens vidde under den norske himmelen",
+    bli: "Bli med oss 🌈",
+    join: "",
+    felles: "Felles møter * Felles ideer * Felles bord",
+    text: "Vi er en nyopprettet organisasjon og håper på mange nye medlemmer!\nHjelp oss å skape et sted åpent for alle!",
+    contact: "Kontakt oss"
+  },
+  pl: {
+    motto: "przestrzeń świata pod norweskim niebem",
+    bli: "Dołącz do nas 🌈",
+    join: "",
+    felles: "Wspólne spotkania * Wspólne pomysły * Wspólny stół",
+    text: "Jesteśmy nowo powstałą organizacją i mamy nadzieję na wielu nowych członków!\nPomóż nam tworzyć miejsce otwarte dla każdego!",
+    contact: "Kontakt"
+  },
+  uk: {
+    motto: "простір світу під норвезьким небом",
+    bli: "Приєднуйся до нас 🌈",
+    join: "",
+    felles: "Спільні зустрічі * Спільні ідеї * Спільний стіл",
+    text: "Ми — нова організація і сподіваємось на багато нових членів!\nДопоможи нам створити місце відкрите для всіх!",
+    contact: "Контакт"
+  },
+  en: {
+    motto: "the expanse of the world under the Norwegian sky",
+    bli: "Join us 🌈",
+    join: "",
+    felles: "Together in meetings * Together in ideas * Together at the table",
+    text: "We are a newly founded organisation and hope for many new members!\nHelp us create a place open to everyone!",
+    contact: "Contact us"
+  },
+  ar: {
+    motto: "اتساع العالم تحت السماء النرويجية",
+    bli: "انضم إلينا 🌈",
+    join: "",
+    felles: "لقاءات مشتركة * أفكار مشتركة * طاولة مشتركة",
+    text: "نحن منظمة حديثة التأسيس ونأمل في الحصول على أعضاء جدد كثيرين!\nساعدنا في بناء مكان مفتوح للجميع!",
+    contact: "تواصل معنا",
+    rtl: true
+  },
+  so: {
+    motto: "ballaadhnida adduunka hoosta samada Noorweejian",
+    bli: "Noogu soo biir 🌈",
+    join: "",
+    felles: "Kulamada wada jirka * Fikirrada wada jirka * Miiska wada jirka",
+    text: "Waxaan nahay urur cusub oo aan rajeyneyno xubnaha cusub oo badan!\nNaga caawi in aan abuuro meel u furan cid walba!",
+    contact: "Xiriir"
+  },
+  ti: {
+    motto: "ሰፊሕነት ዓለም ትሕቲ ኖርወያዊ ሰማይ",
+    bli: "ምሳና ተጸምበር 🌈",
+    join: "",
+    felles: "ሓባራዊ ኣኼባታት * ሓባራዊ ሓሳባት * ሓባራዊ ማእዲ",
+    text: "ሓዲሽ ትካል ኢና፡ ብዙሓት ሓደሽቲ ኣባላት ንጽበ!\nንሓደ ንዂሉ ክፉት ቦታ ምፍጣር ሓግዘና!",
+    contact: "ርክብ"
+  },
+  am: {
+    motto: "የዓለም ስፋት በኖርዌይ ሰማይ ስር",
+    bli: "ተቀላቀለን 🌈",
+    join: "",
+    felles: "የጋራ ስብሰባዎች * የጋራ ሃሳቦች * የጋራ ጠረጴዛ",
+    text: "እኛ አዲስ የተቋቋምን ድርጅት ነን፣ ብዙ አዳዲስ አባላት እንጠብቃለን!\nለሁሉም ክፍት የሆነ ቦታ እንድንፈጥር እርዳን!",
+    contact: "ያግኙን"
+  },
+  fa: {
+    motto: "پهنای جهان زیر آسمان نروژ",
+    bli: "به ما بپیوند 🌈",
+    join: "",
+    felles: "گردهمایی مشترک * ایده‌های مشترک * میز مشترک",
+    text: "ما یک سازمان تازه‌تأسیس هستیم و امیدواریم اعضای جدید زیادی داشته باشیم!\nکمکمان کن مکانی برای همه بسازیم!",
+    contact: "تماس",
+    rtl: true
+  },
+  da: {
+    motto: "پهنای جهان زیر آسمان نروژ",
+    bli: "به ما بپیوند 🌈",
+    join: "",
+    felles: "گردهمایی مشترک * ایده‌های مشترک * میز مشترک",
+    text: "ما یک سازمان تازه تأسیس هستیم و امیدواریم اعضای جدید زیادی داشته باشیم!\nکمکمان کن مکانی برای همه بسازیم! (Dari)",
+    contact: "تماس",
+    rtl: true
+  },
+  ps: {
+    motto: "د نړۍ پراخوالی د ناروې اسمان لاندې",
+    bli: "زموږ سره یوځای شه 🌈",
+    join: "",
+    felles: "ګډې غونډې * ګډې نظرونه * ګډ میز",
+    text: "موږ یوه نوې جوړه شوې سازمان یو او د ډیرو نویو غړو هیله لرو!\nموږ سره مرسته وکړه چې د ټولو لپاره خلاص ځای جوړ کړو!",
+    contact: "اړیکه",
+    rtl: true
+  },
+  de: {
+    motto: "die Weite der Welt unter dem norwegischen Himmel",
+    bli: "Mach mit 🌈",
+    join: "",
+    felles: "Gemeinsame Treffen * Gemeinsame Ideen * Gemeinsamer Tisch",
+    text: "Wir sind eine neu gegründete Organisation und hoffen auf viele neue Mitglieder!\nHilf uns, einen Ort zu schaffen, der für alle offen ist!",
+    contact: "Kontakt"
+  },
+  fr: {
+    motto: "l'étendue du monde sous le ciel norvégien",
+    bli: "Rejoins-nous 🌈",
+    join: "",
+    felles: "Rencontres communes * Idées communes * Table commune",
+    text: "Nous sommes une organisation nouvellement fondée et espérons beaucoup de nouveaux membres!\nAide-nous à créer un lieu ouvert à tous!",
+    contact: "Contact"
+  },
+  es: {
+    motto: "la amplitud del mundo bajo el cielo noruego",
+    bli: "Únete a nosotros 🌈",
+    join: "",
+    felles: "Encuentros compartidos * Ideas compartidas * Mesa compartida",
+    text: "¡Somos una organización recién fundada y esperamos muchos nuevos miembros!\n¡Ayúdanos a crear un lugar abierto para todos!",
+    contact: "Contacto"
+  },
+  pt: {
+    motto: "a imensidão do mundo sob o céu norueguês",
+    bli: "Junta-te a nós 🌈",
+    join: "",
+    felles: "Encontros partilhados * Ideias partilhadas * Mesa partilhada",
+    text: "Somos uma organização recém-fundada e esperamos muitos novos membros!\nAjuda-nos a criar um lugar aberto a todos!",
+    contact: "Contacto"
+  },
+  ro: {
+    motto: "întinderea lumii sub cerul norvegian",
+    bli: "Alătură-te nouă 🌈",
+    join: "",
+    felles: "Întâlniri comune * Idei comune * Masă comună",
+    text: "Suntem o organizație nou fondată și sperăm la mulți membri noi!\nAjută-ne să creăm un loc deschis pentru toți!",
+    contact: "Contact"
+  },
+  sr: {
+    motto: "ширина света под норвешким небом",
+    bli: "Придружи нам се 🌈",
+    join: "",
+    felles: "Заједнички сусрети * Заједничке идеје * Заједнички сто",
+    text: "Ми смо новоосновани организација и надамо се многим новим члановима!\nПомози нам да створимо место отворено за све!",
+    contact: "Контакт"
+  },
+  hr: {
+    motto: "prostranstvo svijeta pod norveškim nebom",
+    bli: "Pridruži nam se 🌈",
+    join: "",
+    felles: "Zajednički susreti * Zajedničke ideje * Zajednički stol",
+    text: "Mi smo novoosnovana organizacija i nadamo se mnogim novim članovima!\nPomozi nam stvoriti mjesto otvoreno za sve!",
+    contact: "Kontakt"
+  },
+  sk: {
+    motto: "šírka sveta pod nórskou oblohou",
+    bli: "Pridaj sa k nám 🌈",
+    join: "",
+    felles: "Spoločné stretnutia * Spoločné nápady * Spoločný stôl",
+    text: "Sme novo založená organizácia a dúfame v mnoho nových členov!\nPomôž nám vytvoriť miesto otvorené pre všetkých!",
+    contact: "Kontakt"
+  },
+  hu: {
+    motto: "a világ tágassága a norvég ég alatt",
+    bli: "Csatlakozz hozzánk 🌈",
+    join: "",
+    felles: "Közös találkozók * Közös ötletek * Közös asztal",
+    text: "Újonnan alapított szervezet vagyunk, és sok új tagot remélünk!\nSegíts nekünk olyan helyet teremteni, amely mindenki előtt nyitott!",
+    contact: "Kapcsolat"
+  },
+  tr: {
+    motto: "Norveç gökyüzü altında dünyanın enginliği",
+    bli: "Bize katıl 🌈",
+    join: "",
+    felles: "Ortak buluşmalar * Ortak fikirler * Ortak masa",
+    text: "Yeni kurulmuş bir organizasyonuz ve birçok yeni üye umuyoruz!\nHerkese açık bir yer oluşturmamıza yardım et!",
+    contact: "İletişim"
+  },
+  lt: {
+    motto: "pasaulio platybės po norvegišku dangumi",
+    bli: "Prisijunk prie mūsų 🌈",
+    join: "",
+    felles: "Bendri susitikimai * Bendros idėjos * Bendras stalas",
+    text: "Esame naujai įkurta organizacija ir tikimės daugelio naujų narių!\nPadėk mums sukurti vietą, atvirą visiems!",
+    contact: "Kontaktas"
+  },
+  lv: {
+    motto: "pasaules plašums zem norvēģu debesīm",
+    bli: "Pievienojies mums 🌈",
+    join: "",
+    felles: "Kopīgas tikšanās * Kopīgas idejas * Kopīgs galds",
+    text: "Mēs esam jaundibināta organizācija un ceram uz daudziem jauniem biedriem!\nPalīdzi mums radīt vietu, kas ir atvērta visiem!",
+    contact: "Kontakts"
+  },
+  fil: {
+    motto: "ang lawak ng mundo sa ilalim ng kalangitan ng Norway",
+    bli: "Samahan mo kami 🌈",
+    join: "",
+    felles: "Magkasamang pagtitipon * Magkasamang mga ideya * Magkasamang hapag",
+    text: "Kami ay isang bagong organisasyon at umaasa sa maraming bagong miyembro!\nTulungan mo kaming lumikha ng lugar na bukas para sa lahat!",
+    contact: "Makipag-ugnayan"
+  },
+  th: {
+    motto: "ความกว้างใหญ่ของโลกใต้ท้องฟ้านอร์เวย์",
+    bli: "มาร่วมกับเรา 🌈",
+    join: "",
+    felles: "การพบปะร่วมกัน * ความคิดร่วมกัน * โต๊ะร่วมกัน",
+    text: "เราเป็นองค์กรที่เพิ่งก่อตั้งและหวังว่าจะมีสมาชิกใหม่มากมาย!\nช่วยเราสร้างสถานที่ที่เปิดกว้างสำหรับทุกคน!",
+    contact: "ติดต่อ"
+  },
+  zh: {
+    motto: "挪威天空下的世界广阔",
+    bli: "加入我们 🌈",
+    join: "",
+    felles: "共同聚会 * 共同想法 * 共同餐桌",
+    text: "我们是一个新成立的组织，希望有很多新成员！\n帮助我们创建一个对所有人开放的地方！",
+    contact: "联系我们"
+  },
+  ja: {
+    motto: "ノルウェーの空の下、世界の広がり",
+    bli: "私たちに参加しよう 🌈",
+    join: "",
+    felles: "共同の集い * 共同のアイデア * 共同のテーブル",
+    text: "私たちは新しく設立された組織で、多くの新しいメンバーを歓迎します！\n皆に開かれた場所を作るのを手伝ってください！",
+    contact: "お問い合わせ"
+  },
+  bn: {
+    motto: "নরওয়ের আকাশের নিচে পৃথিবীর বিস্তার",
+    bli: "আমাদের সাথে যোগ দাও 🌈",
+    join: "",
+    felles: "একসাথে সভা * একসাথে ধারণা * একসাথে টেবিল",
+    text: "আমরা একটি নতুন প্রতিষ্ঠিত সংগঠন এবং অনেক নতুন সদস্যের আশা করি!\nসবার জন্য উন্মুক্ত একটি জায়গা তৈরিতে আমাদের সাহায্য করো!",
+    contact: "যোগাযোগ"
+  },
+  rn: {
+    motto: "ubugari bw'isi munsi y'ijuru ry'Noruveji",
+    bli: "Ituze mu nzira yacu 🌈",
+    join: "",
+    felles: "Guterana hamwe * Ibitekerezo hamwe * Isahani hamwe",
+    text: "Turi umuryango mushya kandi dufise icyizere co kubona abantu benshi bashya!\nDufashe kubaka ahantu hafunguye umuryango wa bose!",
+    contact: "Twandikire"
+  },
+  ln: {
+    motto: "bonsomi ya mokili na nse ya likoló ya Norvège",
+    bli: "Yaka na biso 🌈",
+    join: "",
+    felles: "Bokokani na makita * Bokokani na makanisi * Bokokani na mesa",
+    text: "Tozali organisation ya sika mpe tolingaka bato mingi ya sika!\nSalisa biso kotonga esika oyo efungwami mpo na bato nyonso!",
+    contact: "Simbá biso"
+  },
+  ce: {
+    motto: "дуьненан шоралла норвегийн стигалан кIел",
+    bli: "Вай цхьана хилалаш 🌈",
+    join: "",
+    felles: "ГулагIа цхьана * Ойланаш цхьана * Стол цхьана",
+    text: "Тхо керла кхоллаелла организаци ю, бусалба нах бацахь!\nМассарна а йолу меттиг кхолла тхойшинна гIо де!",
+    contact: "Лакха"
+  },
+  cs: {
+    motto: "šíře světa pod norským nebem",
+    bli: "Přidej se k nám 🌈",
+    join: "",
+    felles: "Společná setkání * Společné nápady * Společný stůl",
+    text: "Jsme nově založená organizace a doufáme v mnoho nových členů!\nPomoz nám vytvořit místo otevřené pro všechny!",
+    contact: "Kontakt"
+  }
+};
+
+function showLang(code) {
+  const l = langs[code];
+  if (!l) return;
+
+  document.querySelectorAll('.flag-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  document.getElementById('header-motto').textContent = l.motto;
+  document.getElementById('content-motto').textContent = l.motto;
+  document.getElementById('bli-med').textContent = l.bli;
+  document.getElementById('join-line').textContent = l.join || '';
+  document.getElementById('felles').textContent = l.felles;
+  document.getElementById('main-text').textContent = l.text;
+  document.getElementById('contact-title').textContent = l.contact;
+
+  const card = document.getElementById('lang-display');
+  card.classList.add('visible');
+
+  const dir = l.rtl ? 'rtl' : 'ltr';
+  card.style.direction = dir;
+  document.getElementById('content-motto').style.direction = dir;
+  document.getElementById('main-text').style.direction = dir;
+
+  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>
