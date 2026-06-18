@@ -20,7 +20,8 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #e8e4df; min-hei
 .lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
 .lang-tile { background: white; border: 2px solid #ddd; border-radius: 12px; padding: 14px 8px; text-align: center; cursor: pointer; transition: all 0.15s ease; }
 .lang-tile:hover, .lang-tile:active { border-color: #C0392B; background: #fff5f5; transform: translateY(-1px); }
-.lang-tile .flag { font-size: 28px; display: block; margin-bottom: 6px; }
+.lang-tile .flag-img { width: 34px; height: 25px; object-fit: cover; border-radius: 3px; display: block; margin: 0 auto 6px; box-shadow: 0 0 0 1px rgba(0,0,0,0.12); }
+.lang-tile .flag-icon { width: 34px; height: 25px; display: block; margin: 0 auto 6px; border-radius: 3px; }
 .lang-tile .name { font-size: 14.5px; font-weight: 700; color: #1a2744; line-height: 1.25; }
 
 #poster-view { display: none; }
@@ -69,34 +70,41 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #e8e4df; min-hei
 
 <script>
 const langs = {
-  no:  { name: "Norsk",        flag: "🇳🇴" },
-  pl:  { name: "Polski",       flag: "🇵🇱" },
-  uk:  { name: "Українська",   flag: "🇺🇦" },
-  en:  { name: "English",      flag: "🇬🇧" },
-  ar:  { name: "العربية",      flag: "🇸🇦" },
-  so:  { name: "Soomaali",     flag: "🇸🇴" },
-  ti:  { name: "ትግርኛ",        flag: "🇪🇷" },
-  am:  { name: "አማርኛ",        flag: "🇪🇹" },
-  fa:  { name: "فارسی",        flag: "🇮🇷" },
-  ps:  { name: "پښتو",         flag: "🇦🇫" },
-  de:  { name: "Deutsch",      flag: "🇩🇪" },
-  fr:  { name: "Français",     flag: "🇫🇷" },
-  es:  { name: "Español",      flag: "🇪🇸" },
-  pt:  { name: "Português",    flag: "🇵🇹" },
-  ro:  { name: "Română",       flag: "🇷🇴" },
-  sr:  { name: "Српски",       flag: "🇷🇸" },
-  hr:  { name: "Hrvatski",     flag: "🇭🇷" },
-  sk:  { name: "Slovenčina",   flag: "🇸🇰" },
-  lt:  { name: "Lietuvių",     flag: "🇱🇹" },
-  lv:  { name: "Latviešu",     flag: "🇱🇻" },
-  fil: { name: "Filipino",     flag: "🇵🇭" },
-  th:  { name: "ภาษาไทย",      flag: "🇹🇭" },
-  zh:  { name: "中文",         flag: "🇨🇳" },
-  ja:  { name: "日本語",        flag: "🇯🇵" },
-  bn:  { name: "বাংলা",        flag: "🇧🇩" },
-  ln:  { name: "Lingala",      flag: "🇨🇩" },
-  cs:  { name: "Čeština",      flag: "🇨🇿" }
+  no:  { name: "Norsk",        cc: "no" },
+  pl:  { name: "Polski",       cc: "pl" },
+  uk:  { name: "Українська",   cc: "ua" },
+  en:  { name: "English",      cc: "gb" },
+  ar:  { name: "العربية",      icon: "crescent" },
+  so:  { name: "Soomaali",     cc: "so" },
+  ti:  { name: "ትግርኛ",        cc: "er" },
+  am:  { name: "አማርኛ",        cc: "et" },
+  fa:  { name: "فارسی",        cc: "ir" },
+  ps:  { name: "پښتو",         cc: "af" },
+  de:  { name: "Deutsch",      cc: "de" },
+  fr:  { name: "Français",     cc: "fr" },
+  es:  { name: "Español",      cc: "es" },
+  pt:  { name: "Português",    cc: "pt" },
+  ro:  { name: "Română",       cc: "ro" },
+  sr:  { name: "Српски",       cc: "rs" },
+  hr:  { name: "Hrvatski",     cc: "hr" },
+  sk:  { name: "Slovenčina",   cc: "sk" },
+  lt:  { name: "Lietuvių",     cc: "lt" },
+  lv:  { name: "Latviešu",     cc: "lv" },
+  fil: { name: "Filipino",     cc: "ph" },
+  th:  { name: "ภาษาไทย",      cc: "th" },
+  zh:  { name: "中文",         cc: "cn" },
+  ja:  { name: "日本語",        cc: "jp" },
+  bn:  { name: "বাংলা",        cc: "bd" },
+  ln:  { name: "Lingala",      cc: "cd" },
+  cs:  { name: "Čeština",      cc: "cz" }
 };
+
+const crescentIconSVG = `<svg class="flag-icon" viewBox="0 0 34 25" xmlns="http://www.w3.org/2000/svg">
+  <rect width="34" height="25" rx="3" fill="#0f6b42"/>
+  <circle cx="12" cy="12.5" r="7" fill="#ffffff"/>
+  <circle cx="15" cy="11.2" r="5.8" fill="#0f6b42"/>
+  <path d="M23,9.2 L23.76,11.45 L26.14,11.48 L24.24,12.9 L24.94,15.17 L23,13.8 L21.06,15.17 L21.76,12.9 L19.86,11.48 L22.24,11.45 Z" fill="#ffffff"/>
+</svg>`;
 
 const grid = document.getElementById('lang-grid');
 Object.keys(langs).forEach(code => {
@@ -104,7 +112,10 @@ Object.keys(langs).forEach(code => {
   const btn = document.createElement('div');
   btn.className = 'lang-tile';
   btn.onclick = () => showLang(code);
-  btn.innerHTML = `<span class="flag">${l.flag}</span><span class="name">${l.name}</span>`;
+  const iconHtml = l.icon === 'crescent'
+    ? crescentIconSVG
+    : `<img class="flag-img" src="https://flagcdn.com/h48/${l.cc}.png" alt="" loading="lazy">`;
+  btn.innerHTML = `${iconHtml}<span class="name">${l.name}</span>`;
   grid.appendChild(btn);
 });
 
