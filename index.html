@@ -6,195 +6,122 @@
 <title>Interkulturelt Senter Sogndal</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Georgia', serif; background: #e8e4df; min-height: 100vh; }
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #e8e4df; min-height: 100vh; }
 
-.lang-page { display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 24px 16px; }
-.lang-header { background: #1a2744; color: white; text-align: center; padding: 20px 16px; width: 100%; max-width: 500px; border-radius: 12px; margin-bottom: 20px; }
-.lang-header .motto { font-style: italic; font-size: 12px; color: #aab4cc; margin-bottom: 6px; }
-.lang-header h1 { font-size: 22px; font-weight: 900; letter-spacing: 2px; }
-.lang-header h1 span { color: #C0392B; }
-.lang-intro { font-size: 13px; color: #666; text-align: center; margin-bottom: 16px; font-family: sans-serif; }
-.flags-grid { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 500px; }
-.flag-btn { background: white; border: 2px solid #ddd; border-radius: 8px; padding: 5px 9px; font-size: 16px; cursor: pointer; display: flex; align-items: center; gap: 3px; transition: all 0.2s; }
-.flag-btn:hover { border-color: #C0392B; background: #fff5f5; }
-.flag-btn .ln { font-size: 9px; color: #888; font-family: sans-serif; }
+.container { max-width: 560px; margin: 0 auto; padding: 24px 16px 40px; }
 
-.poster-page { display: none; max-width: 480px; margin: 0 auto; background: #f0ece8; min-height: 100vh; }
-.poster-page.visible { display: block; }
+.header { text-align: center; background: #1a2744; color: white; padding: 22px 16px; border-radius: 14px; margin-bottom: 18px; }
+.header .motto { font-style: italic; font-size: 12px; color: #aab4cc; margin-bottom: 6px; }
+.header h1 { font-size: 23px; font-weight: 900; letter-spacing: 2px; }
+.header h1 span { color: #e57368; }
 
-.poster-motto { font-style: italic; font-size: 11px; color: #1a2744; padding: 10px 12px 4px 80px; letter-spacing: 0.3px; }
+.lang-intro { font-size: 13px; color: #555; text-align: center; margin-bottom: 18px; }
 
-.poster-main { display: flex; }
-.poster-vertical { writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); font-size: 38px; font-weight: 900; color: #1a2744; letter-spacing: 2px; padding: 8px 4px; flex-shrink: 0; line-height: 1; }
-.poster-right { flex: 1; display: flex; flex-direction: column; }
+.lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.lang-tile { background: white; border: 2px solid #ddd; border-radius: 12px; padding: 14px 8px; text-align: center; cursor: pointer; transition: all 0.15s ease; }
+.lang-tile:hover, .lang-tile:active { border-color: #C0392B; background: #fff5f5; transform: translateY(-1px); }
+.lang-tile .flag { font-size: 28px; display: block; margin-bottom: 6px; }
+.lang-tile .name { font-size: 14.5px; font-weight: 700; color: #1a2744; line-height: 1.25; }
 
-.poster-logo { display: flex; justify-content: space-between; align-items: center; padding: 6px 10px 4px 4px; }
-.poster-senter { font-size: 30px; font-weight: 900; color: #C0392B; letter-spacing: 1px; }
-.poster-logo-circle { width: 44px; height: 44px; border: 1.5px solid #1a2744; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 5.5px; color: #1a2744; text-align: center; letter-spacing: 0.3px; font-family: sans-serif; font-weight: 700; padding: 4px; line-height: 1.4; }
+#poster-view { display: none; }
+#poster-view.visible { display: block; }
 
-.poster-img-container { padding: 0 4px 0 2px; }
-.poster-img-main { width: 100%; height: 340px; object-fit: cover; object-position: center; display: block; }
+.poster-img-wrap { max-width: 100%; margin: 0 auto; }
+.poster-img-wrap img { width: 100%; display: block; border-radius: 6px; box-shadow: 0 6px 24px rgba(0,0,0,0.18); }
 
-.poster-join { text-align: center; padding: 8px 4px 2px; }
-.poster-join-title { font-size: 34px; font-weight: 900; color: #C0392B; line-height: 1; margin-bottom: 3px; }
-.poster-join-line { width: 80%; height: 2px; background: #C0392B; margin: 4px auto; }
-.poster-join-langs { font-size: 12px; color: #1a2744; font-weight: 600; padding: 2px 8px; line-height: 1.6; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 18px 0 8px; }
+.action-btn { flex: 1 1 140px; max-width: 220px; text-align: center; padding: 13px 14px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 14px; color: white; }
+.action-btn .ico { margin-right: 6px; }
+.action-btn.fb { background: #1877F2; }
+.action-btn.ms { background: #0084FF; }
+.action-btn.em { background: #1a2744; }
 
-.poster-contact-small { padding: 4px 12px 2px; text-align: right; }
-.poster-contact-small a { display: block; font-size: 11px; color: #1a2744; text-decoration: none; font-family: sans-serif; line-height: 1.9; }
-
-.poster-text { padding: 10px 16px 6px; text-align: center; font-size: 14px; line-height: 1.6; color: #1a2744; white-space: pre-line; }
-.poster-felles { text-align: center; padding: 8px 16px 14px; font-size: 15px; font-weight: 700; color: #C0392B; letter-spacing: 0.3px; }
-
-.contact-btns { padding: 0 16px 16px; display: flex; flex-direction: column; gap: 8px; }
-.cbtn { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; text-decoration: none; font-size: 13px; font-family: sans-serif; font-weight: 600; color: white; }
-.cbtn.fb { background: #1877F2; }
-.cbtn.ms { background: linear-gradient(135deg, #0099FF, #A033FF); }
-.cbtn.em { background: #C0392B; }
-
-.back-btn { display: block; text-align: center; padding: 12px; font-size: 13px; color: #888; font-family: sans-serif; cursor: pointer; text-decoration: underline; margin-bottom: 16px; }
+.back-btn { display: block; text-align: center; padding: 14px; font-size: 13px; color: #777; cursor: pointer; text-decoration: underline; margin-top: 6px; }
 </style>
 </head>
 <body>
 
-<div class="lang-page" id="lang-page">
-  <div class="lang-header">
-    <div class="motto">verdens vidde under den norske himmelen</div>
-    <h1>INTERKULTURELT <span>Senter</span></h1>
-  </div>
-  <p class="lang-intro">Vel språk / Choose your language / اختر لغتك / Wybierz język</p>
-  <div class="flags-grid">
-    <button class="flag-btn" onclick="showPoster('no')">🇳🇴 <span class="ln">Nynorsk</span></button>
-    <button class="flag-btn" onclick="showPoster('nb')">🇳🇴 <span class="ln">Bokmål</span></button>
-    <button class="flag-btn" onclick="showPoster('pl')">🇵🇱 <span class="ln">Polski</span></button>
-    <button class="flag-btn" onclick="showPoster('uk')">🇺🇦 <span class="ln">Українська</span></button>
-    <button class="flag-btn" onclick="showPoster('en')">🇬🇧 <span class="ln">English</span></button>
-    <button class="flag-btn" onclick="showPoster('ar')">🇸🇦 <span class="ln">العربية</span></button>
-    <button class="flag-btn" onclick="showPoster('so')">🇸🇴 <span class="ln">Soomaali</span></button>
-    <button class="flag-btn" onclick="showPoster('ti')">🇪🇷 <span class="ln">ትግርኛ</span></button>
-    <button class="flag-btn" onclick="showPoster('am')">🇪🇹 <span class="ln">አማርኛ</span></button>
-    <button class="flag-btn" onclick="showPoster('fa')">🇮🇷 <span class="ln">فارسی</span></button>
-    <button class="flag-btn" onclick="showPoster('da')">🇦🇫 <span class="ln">Dari</span></button>
-    <button class="flag-btn" onclick="showPoster('ps')">🇦🇫 <span class="ln">پښتو</span></button>
-    <button class="flag-btn" onclick="showPoster('de')">🇩🇪 <span class="ln">Deutsch</span></button>
-    <button class="flag-btn" onclick="showPoster('fr')">🇫🇷 <span class="ln">Français</span></button>
-    <button class="flag-btn" onclick="showPoster('es')">🇪🇸 <span class="ln">Español</span></button>
-    <button class="flag-btn" onclick="showPoster('pt')">🇧🇷 <span class="ln">Português</span></button>
-    <button class="flag-btn" onclick="showPoster('ro')">🇷🇴 <span class="ln">Română</span></button>
-    <button class="flag-btn" onclick="showPoster('sr')">🇷🇸 <span class="ln">Српски</span></button>
-    <button class="flag-btn" onclick="showPoster('hr')">🇭🇷 <span class="ln">Hrvatski</span></button>
-    <button class="flag-btn" onclick="showPoster('sk')">🇸🇰 <span class="ln">Slovenčina</span></button>
-    <button class="flag-btn" onclick="showPoster('hu')">🇭🇺 <span class="ln">Magyar</span></button>
-    <button class="flag-btn" onclick="showPoster('tr')">🇹🇷 <span class="ln">Türkçe</span></button>
-    <button class="flag-btn" onclick="showPoster('lt')">🇱🇹 <span class="ln">Lietuvių</span></button>
-    <button class="flag-btn" onclick="showPoster('lv')">🇱🇻 <span class="ln">Latviešu</span></button>
-    <button class="flag-btn" onclick="showPoster('fil')">🇵🇭 <span class="ln">Filipino</span></button>
-    <button class="flag-btn" onclick="showPoster('th')">🇹🇭 <span class="ln">ภาษาไทย</span></button>
-    <button class="flag-btn" onclick="showPoster('zh')">🇨🇳 <span class="ln">中文</span></button>
-    <button class="flag-btn" onclick="showPoster('ja')">🇯🇵 <span class="ln">日本語</span></button>
-    <button class="flag-btn" onclick="showPoster('bn')">🇧🇩 <span class="ln">বাংলা</span></button>
-    <button class="flag-btn" onclick="showPoster('rn')">🇧🇮 <span class="ln">Ikirundi</span></button>
-    <button class="flag-btn" onclick="showPoster('ln')">🇨🇩 <span class="ln">Lingala</span></button>
-    <button class="flag-btn" onclick="showPoster('ce')">🏔️ <span class="ln">Нохчийн</span></button>
-    <button class="flag-btn" onclick="showPoster('cs')">🇨🇿 <span class="ln">Čeština</span></button>
-  </div>
-</div>
+<div class="container">
 
-<div class="poster-page" id="poster-page">
-  <div class="poster-motto" id="p-motto"></div>
-  <div class="poster-main">
-    <div class="poster-vertical">INTERKULTURELT</div>
-    <div class="poster-right">
-      <div class="poster-logo">
-        <div class="poster-senter">Senter</div>
-        <div class="poster-logo-circle">INTERKULTUREL<br>SENTER</div>
-      </div>
-      <div class="poster-img-container">
-        <img src="Interkulturelt%203.png" alt="Interkulturelt Senter" class="poster-img-main">
-      </div>
-      <div class="poster-join">
-        <div class="poster-join-title" id="p-join"></div>
-        <div class="poster-join-line"></div>
-        <div class="poster-join-langs" id="p-joinlangs"></div>
-      </div>
-      <div class="poster-contact-small">
-        <a href="https://www.facebook.com/InterkultureltSenter" target="_blank">📘 facebook.com/InterkultureltSenter</a>
-        <a href="https://m.me/InterkultureltSenter" target="_blank">💬 Messenger: Interkulturelt Senter</a>
-        <a href="mailto:interkultureltsenter@gmail.com">✉️ interkultureltsenter@gmail.com</a>
-      </div>
+  <div id="lang-page">
+    <div class="header">
+      <div class="motto">verdens vidde under den norske himmelen</div>
+      <h1>INTERKULTURELT <span>Senter</span></h1>
     </div>
+    <p class="lang-intro">Vel språk / Choose your language / اختر لغتك / Wybierz język</p>
+    <div class="lang-grid" id="lang-grid"></div>
   </div>
 
-  <div class="poster-text" id="p-text"></div>
-  <div class="poster-felles" id="p-felles"></div>
-
-  <div class="contact-btns">
-    <a href="https://www.facebook.com/InterkultureltSenter" class="cbtn fb" target="_blank">📘 facebook.com/InterkultureltSenter</a>
-    <a href="https://m.me/InterkultureltSenter" class="cbtn ms" target="_blank">💬 Messenger: Interkulturelt Senter</a>
-    <a href="mailto:interkultureltsenter@gmail.com" class="cbtn em">✉️ interkultureltsenter@gmail.com</a>
+  <div id="poster-view">
+    <span class="back-btn" onclick="goBack()">← Vel språk / Choose language</span>
+    <div class="poster-img-wrap">
+      <img id="poster-img" src="" alt="Plakat">
+    </div>
+    <div class="actions">
+      <a class="action-btn fb" href="https://www.facebook.com/InterkultureltSenter" target="_blank" rel="noopener"><span class="ico">📘</span>Facebook</a>
+      <a class="action-btn ms" href="https://m.me/InterkultureltSenter" target="_blank" rel="noopener"><span class="ico">💬</span>Messenger</a>
+      <a class="action-btn em" href="mailto:interkultureltsenter@gmail.com"><span class="ico">✉️</span>Email</a>
+    </div>
+    <span class="back-btn" onclick="goBack()">← Vel språk / Choose language</span>
   </div>
 
-  <span class="back-btn" onclick="goBack()">← Vel språk / Choose language</span>
 </div>
 
 <script>
 const langs = {
-  no:{motto:"verdens vidde under den norske himmelen",join:"Bli med oss 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Vi er ein nyoppretta organisasjon og håpar på mange nye medlemer!\nHjelp oss å skapa ein stad open for alle!",felles:"Felles møte * Felles idear * Felles bord",rtl:false},
-  nb:{motto:"verdens vidde under den norske himmelen",join:"Bli med oss 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Vi er en nyopprettet organisasjon og håper på mange nye medlemmer!\nHjelp oss å skape et sted åpent for alle!",felles:"Felles møter * Felles ideer * Felles bord",rtl:false},
-  pl:{motto:"przestrzeń świata pod norweskim niebem",join:"Dołącz do nas 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bli med oss",text:"Jesteśmy nowo powstałą organizacją i mamy nadzieję na wielu nowych członków!\nPomóż nam tworzyć miejsce otwarte dla każdego!",felles:"Wspólne spotkania * Wspólne pomysły * Wspólny stół",rtl:false},
-  uk:{motto:"простір світу під норвезьким небом",join:"Приєднуйся до нас 🌈",joinlangs:"كن معنا • Bli med oss • ምሳና ተጸምበር • Bądź z nami",text:"Ми — нова організація і сподіваємось на багато нових членів!\nДопоможи нам створити місце відкрите для всіх!",felles:"Спільні зустрічі * Спільні ідеї * Спільний стіл",rtl:false},
-  en:{motto:"the expanse of the world under the Norwegian sky",join:"Join us 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"We are a newly founded organisation and hope for many new members!\nHelp us create a place open to everyone!",felles:"Together in meetings * Together in ideas * Together at the table",rtl:false},
-  ar:{motto:"اتساع العالم تحت السماء النرويجية",join:"انضم إلينا 🌈",joinlangs:"Bli med oss • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"نحن منظمة حديثة التأسيس ونأمل في الحصول على أعضاء جدد كثيرين!\nساعدنا في بناء مكان مفتوح للجميع!",felles:"لقاءات مشتركة * أفكار مشتركة * طاولة مشتركة",rtl:true},
-  so:{motto:"ballaadhnida adduunka hoosta samada Noorweejian",join:"Noogu soo biir 🌈",joinlangs:"كن معنا • Будь з нами • Bli med oss • Bądź z nami",text:"Waxaan nahay urur cusub oo aan rajeyneyno xubnaha cusub oo badan!\nNaga caawi in aan abuuro meel u furan cid walba!",felles:"Kulamada wada jirka * Fikirrada wada jirka * Miiska wada jirka",rtl:false},
-  ti:{motto:"ሰፊሕነት ዓለም ትሕቲ ኖርወያዊ ሰማይ",join:"ምሳና ተጸምበር 🌈",joinlangs:"كن معنا • Будь з нами • Bli med oss • Bądź z nami",text:"ሓዲሽ ትካል ኢና፡ ብዙሓት ሓደሽቲ ኣባላት ንጽበ!\nንሓደ ንዂሉ ክፉት ቦታ ምፍጣር ሓግዘና!",felles:"ሓባራዊ ኣኼባታት * ሓባራዊ ሓሳባት * ሓባራዊ ማእዲ",rtl:false},
-  am:{motto:"የዓለም ስፋት በኖርዌይ ሰማይ ስር",join:"ተቀላቀለን 🌈",joinlangs:"كن معنا • Будь з нами • Bli med oss • Bądź z nami",text:"እኛ አዲስ የተቋቋምን ድርጅት ነን፣ ብዙ አዳዲስ አባላት እንጠብቃለን!\nለሁሉም ክፍት የሆነ ቦታ እንድንፈጥር እርዳን!",felles:"የጋራ ስብሰባዎች * የጋራ ሃሳቦች * የጋራ ጠረጴዛ",rtl:false},
-  fa:{motto:"پهنای جهان زیر آسمان نروژ",join:"به ما بپیوند 🌈",joinlangs:"Bli med oss • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"ما یک سازمان تازه‌تأسیس هستیم و امیدواریم اعضای جدید زیادی داشته باشیم!\nکمکمان کن مکانی برای همه بسازیم!",felles:"گردهمایی مشترک * ایده‌های مشترک * میز مشترک",rtl:true},
-  da:{motto:"پهنای جهان زیر آسمان نروژ",join:"به ما بپیوند 🌈",joinlangs:"Bli med oss • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"ما یک سازمان تازه تأسیس هستیم (Dari)\nکمکمان کن مکانی برای همه بسازیم!",felles:"گردهمایی مشترک * ایده‌های مشترک * میز مشترک",rtl:true},
-  ps:{motto:"د نړۍ پراخوالی د ناروې اسمان لاندې",join:"زموږ سره یوځای شه 🌈",joinlangs:"Bli med oss • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"موږ یوه نوې سازمان یو او د ډیرو نویو غړو هیله لرو!\nموږ سره مرسته وکړه چې د ټولو لپاره خلاص ځای جوړ کړو!",felles:"ګډې غونډې * ګډې نظرونه * ګډ میز",rtl:true},
-  de:{motto:"die Weite der Welt unter dem norwegischen Himmel",join:"Mach mit 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Wir sind eine neu gegründete Organisation und hoffen auf viele neue Mitglieder!\nHilf uns, einen Ort zu schaffen, der für alle offen ist!",felles:"Gemeinsame Treffen * Gemeinsame Ideen * Gemeinsamer Tisch",rtl:false},
-  fr:{motto:"l'étendue du monde sous le ciel norvégien",join:"Rejoins-nous 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Nous sommes une organisation nouvellement fondée et espérons beaucoup de nouveaux membres!\nAide-nous à créer un lieu ouvert à tous!",felles:"Rencontres communes * Idées communes * Table commune",rtl:false},
-  es:{motto:"la amplitud del mundo bajo el cielo noruego",join:"Únete a nosotros 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"¡Somos una organización recién fundada y esperamos muchos nuevos miembros!\n¡Ayúdanos a crear un lugar abierto para todos!",felles:"Encuentros compartidos * Ideas compartidas * Mesa compartida",rtl:false},
-  pt:{motto:"a imensidão do mundo sob o céu norueguês",join:"Junta-te a nós 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Somos uma organização recém-fundada e esperamos muitos novos membros!\nAjuda-nos a criar um lugar aberto a todos!",felles:"Encontros partilhados * Ideias partilhadas * Mesa partilhada",rtl:false},
-  ro:{motto:"întinderea lumii sub cerul norvegian",join:"Alătură-te nouă 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Suntem o organizație nou fondată și sperăm la mulți membri noi!\nAjută-ne să creăm un loc deschis pentru toți!",felles:"Întâlniri comune * Idei comune * Masă comună",rtl:false},
-  sr:{motto:"ширина света под норвешким небом",join:"Придружи нам се 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Ми смо новоосновани организација и надамо се многим новим члановима!\nПомози нам да створимо место отворено за све!",felles:"Заједнички сусрети * Заједничке идеје * Заједнички сто",rtl:false},
-  hr:{motto:"prostranstvo svijeta pod norveškim nebom",join:"Pridruži nam se 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Mi smo novoosnovana organizacija i nadamo se mnogim novim članovima!\nPomozi nam stvoriti mjesto otvoreno za sve!",felles:"Zajednički susreti * Zajedničke ideje * Zajednički stol",rtl:false},
-  sk:{motto:"šírka sveta pod nórskou oblohou",join:"Pridaj sa k nám 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Sme novo založená organizácia a dúfame v mnoho nových členov!\nPomôž nám vytvoriť miesto otvorené pre všetkých!",felles:"Spoločné stretnutia * Spoločné nápady * Spoločný stôl",rtl:false},
-  hu:{motto:"a világ tágassága a norvég ég alatt",join:"Csatlakozz hozzánk 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Újonnan alapított szervezet vagyunk, és sok új tagot remélünk!\nSegíts nekünk olyan helyet teremteni, amely mindenki előtt nyitott!",felles:"Közös találkozók * Közös ötletek * Közös asztal",rtl:false},
-  tr:{motto:"Norveç gökyüzü altında dünyanın enginliği",join:"Bize katıl 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Yeni kurulmuş bir organizasyonuz ve birçok yeni üye umuyoruz!\nHerkese açık bir yer oluşturmamıza yardım et!",felles:"Ortak buluşmalar * Ortak fikirler * Ortak masa",rtl:false},
-  lt:{motto:"pasaulio platybės po norvegišku dangumi",join:"Prisijunk prie mūsų 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Esame naujai įkurta organizacija ir tikimės daugelio naujų narių!\nPadėk mums sukurti vietą, atvirą visiems!",felles:"Bendri susitikimai * Bendros idėjos * Bendras stalas",rtl:false},
-  lv:{motto:"pasaules plašums zem norvēģu debesīm",join:"Pievienojies mums 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Mēs esam jaundibināta organizācija un ceram uz daudziem jauniem biedriem!\nPalīdzi mums radīt vietu, kas ir atvērta visiem!",felles:"Kopīgas tikšanās * Kopīgas idejas * Kopīgs galds",rtl:false},
-  fil:{motto:"ang lawak ng mundo sa ilalim ng kalangitan ng Norway",join:"Samahan mo kami 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Kami ay isang bagong organisasyon at umaasa sa maraming bagong miyembro!\nTulungan mo kaming lumikha ng lugar na bukas para sa lahat!",felles:"Magkasamang pagtitipon * Magkasamang mga ideya * Magkasamang hapag",rtl:false},
-  th:{motto:"ความกว้างใหญ่ของโลกใต้ท้องฟ้านอร์เวย์",join:"มาร่วมกับเรา 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"เราเป็นองค์กรที่เพิ่งก่อตั้งและหวังว่าจะมีสมาชิกใหม่มากมาย!\nช่วยเราสร้างสถานที่ที่เปิดกว้างสำหรับทุกคน!",felles:"การพบปะร่วมกัน * ความคิดร่วมกัน * โต๊ะร่วมกัน",rtl:false},
-  zh:{motto:"挪威天空下的世界广阔",join:"加入我们 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"我们是一个新成立的组织，希望有很多新成员！\n帮助我们创建一个对所有人开放的地方！",felles:"共同聚会 * 共同想法 * 共同餐桌",rtl:false},
-  ja:{motto:"ノルウェーの空の下、世界の広がり",join:"私たちに参加しよう 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"私たちは新しく設立された組織で、多くの新しいメンバーを歓迎します！\n皆に開かれた場所を作るのを手伝ってください！",felles:"共同の集い * 共同のアイデア * 共同のテーブル",rtl:false},
-  bn:{motto:"নরওয়ের আকাশের নিচে পৃথিবীর বিস্তার",join:"আমাদের সাথে যোগ দাও 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"আমরা একটি নতুন প্রতিষ্ঠিত সংগঠন এবং অনেক নতুন সদস্যের আশা করি!\nসবার জন্য উন্মুক্ত একটি জায়গা তৈরিতে আমাদের সাহায্য করো!",felles:"একসাথে সভা * একসাথে ধারণা * একসাথে টেবিল",rtl:false},
-  rn:{motto:"ubugari bw'isi munsi y'ijuru ry'Noruveji",join:"Ituze mu nzira yacu 🌈",joinlangs:"كن معنا • Будь з нами • Bli med oss • Bądź z nami",text:"Turi umuryango mushya kandi dufise icyizere co kubona abantu benshi bashya!\nDufashe kubaka ahantu hafunguye umuryango wa bose!",felles:"Guterana hamwe * Ibitekerezo hamwe * Isahani hamwe",rtl:false},
-  ln:{motto:"bonsomi ya mokili na nse ya likoló ya Norvège",join:"Yaka na biso 🌈",joinlangs:"كن معنا • Будь з нами • Bli med oss • Bądź z nami",text:"Tozali organisation ya sika mpe tolingaka bato mingi ya sika!\nSalisa biso kotonga esika oyo efungwami mpo na bato nyonso!",felles:"Bokokani na makita * Bokokani na makanisi * Bokokani na mesa",rtl:false},
-  ce:{motto:"дуьненан шоралла норвегийн стигалан кIел",join:"Вай цхьана хилалаш 🌈",joinlangs:"كن معنا • Будь з нами • Bli med oss • Bądź z nami",text:"Тхо керла кхоллаелла организаци ю!\nМассарна а йолу меттиг кхолла тхойшинна гIо де!",felles:"ГулагIа цхьана * Ойланаш цхьана * Стол цхьана",rtl:false},
-  cs:{motto:"šíře světa pod norským nebem",join:"Přidej se k nám 🌈",joinlangs:"كن معنا • Будь з нами • ምሳና ተጸምበር • Bądź z nami",text:"Jsme nově založená organizace a doufáme v mnoho nových členů!\nPomoz nám vytvořit místo otevřené pro všechny!",felles:"Společná setkání * Společné nápady * Společný stůl",rtl:false}
+  no:  { name: "Norsk",        flag: "🇳🇴" },
+  pl:  { name: "Polski",       flag: "🇵🇱" },
+  uk:  { name: "Українська",   flag: "🇺🇦" },
+  en:  { name: "English",      flag: "🇬🇧" },
+  ar:  { name: "العربية",      flag: "🇸🇦" },
+  so:  { name: "Soomaali",     flag: "🇸🇴" },
+  ti:  { name: "ትግርኛ",        flag: "🇪🇷" },
+  am:  { name: "አማርኛ",        flag: "🇪🇹" },
+  fa:  { name: "فارسی",        flag: "🇮🇷" },
+  ps:  { name: "پښتو",         flag: "🇦🇫" },
+  de:  { name: "Deutsch",      flag: "🇩🇪" },
+  fr:  { name: "Français",     flag: "🇫🇷" },
+  es:  { name: "Español",      flag: "🇪🇸" },
+  pt:  { name: "Português",    flag: "🇵🇹" },
+  ro:  { name: "Română",       flag: "🇷🇴" },
+  sr:  { name: "Српски",       flag: "🇷🇸" },
+  hr:  { name: "Hrvatski",     flag: "🇭🇷" },
+  sk:  { name: "Slovenčina",   flag: "🇸🇰" },
+  lt:  { name: "Lietuvių",     flag: "🇱🇹" },
+  lv:  { name: "Latviešu",     flag: "🇱🇻" },
+  fil: { name: "Filipino",     flag: "🇵🇭" },
+  th:  { name: "ภาษาไทย",      flag: "🇹🇭" },
+  zh:  { name: "中文",         flag: "🇨🇳" },
+  ja:  { name: "日本語",        flag: "🇯🇵" },
+  bn:  { name: "বাংলা",        flag: "🇧🇩" },
+  ln:  { name: "Lingala",      flag: "🇨🇩" },
+  cs:  { name: "Čeština",      flag: "🇨🇿" }
 };
 
-function showPoster(code) {
+const grid = document.getElementById('lang-grid');
+Object.keys(langs).forEach(code => {
+  const l = langs[code];
+  const btn = document.createElement('div');
+  btn.className = 'lang-tile';
+  btn.onclick = () => showLang(code);
+  btn.innerHTML = `<span class="flag">${l.flag}</span><span class="name">${l.name}</span>`;
+  grid.appendChild(btn);
+});
+
+function showLang(code) {
   const l = langs[code];
   if (!l) return;
-  document.getElementById('p-motto').textContent = l.motto;
-  document.getElementById('p-join').textContent = l.join;
-  document.getElementById('p-joinlangs').textContent = l.joinlangs;
-  document.getElementById('p-text').textContent = l.text;
-  document.getElementById('p-felles').textContent = l.felles;
-  const dir = l.rtl ? 'rtl' : 'ltr';
-  ['p-text','p-join','p-felles','p-joinlangs','p-motto'].forEach(id => {
-    document.getElementById(id).style.direction = dir;
-  });
+  document.getElementById('poster-img').src = `plakaty/${code}.png`;
+  document.getElementById('poster-img').alt = l.name;
   document.getElementById('lang-page').style.display = 'none';
-  document.getElementById('poster-page').classList.add('visible');
-  window.scrollTo(0,0);
+  document.getElementById('poster-view').classList.add('visible');
+  window.scrollTo(0, 0);
 }
 
 function goBack() {
-  document.getElementById('lang-page').style.display = 'flex';
-  document.getElementById('poster-page').classList.remove('visible');
-  window.scrollTo(0,0);
+  document.getElementById('lang-page').style.display = 'block';
+  document.getElementById('poster-view').classList.remove('visible');
+  window.scrollTo(0, 0);
 }
 </script>
 </body>
